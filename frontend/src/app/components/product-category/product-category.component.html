@@ -1,0 +1,18 @@
+<div class="menu-sidebar-content js-scrollbar1">
+  <nav class="navbar-sidebar">
+    <h2 class="card-title mb-4"> Filter-by: </h2>
+
+    <ul class="list-unstyled navbar-list">
+
+      <li *ngFor="let tempProductCategory of productCategories">
+
+        <a routerLink="/category/{{ tempProductCategory.id }}" routerLinkActive="active-link" class="btn">
+          {{ tempProductCategory.categoryName }}
+        </a>
+
+      </li>
+
+    </ul>
+  </nav>
+</div>
+

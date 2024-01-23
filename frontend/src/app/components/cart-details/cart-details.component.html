@@ -1,0 +1,66 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      @if (cartItems.length > 0){
+        <div class="card mb-4 bg-transparent">
+          <div class="card-body">
+            <h3 class="mx-3 mb-2"> Total Price: {{totalPrice | currency: "USD" }}</h3>
+            <a class="btn btn-danger btn-lg mx-3" routerLink="/checkout"> Checkout </a>
+          </div>
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+          <tr>
+            <th scope="col" style="width: 60px">Item #</th>
+            <th scope="col" style="width: 200px">Product Image</th>
+            <th scope="col">Details</th>
+            <th scope="col" style="width: 200px"></th>
+          </tr>
+          </thead>
+          <tbody>
+            @for(item of cartItems; track item.id){
+              <tr>
+                <th scope="row">{{ item.id }}</th>
+                <td ><img [src]="item.imageUrl"  alt="item image"></td>
+                <td>
+                  <p> {{ item.name }}</p>
+                  <p> {{item.unitPrice | currency: 'USD'}} </p>
+                </td>
+                <td>
+                    <p class="fw-bold">Quantity:</p>
+                    <div class="row no-gutters">
+                      <div class="col">
+                        <button (click)="incrementQuantity(item)" class="btn btn-primary btn-sm mb-1">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                      <div class="col">{{ item.quantity }} </div>
+                      <div class="col">
+                        <button (click)="decrementQuantity(item)" class="btn btn-primary btn-sm">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                      <div class="col"></div>
+                    </div>
+                    <button class="btn btn-info btn-sm my-2" (click)="remove(item)"> Remove </button>
+                    <p class="fw-bolder"> Subtotal: {{ (item.unitPrice * item.quantity) | currency: "USD" }}</p>
+                </td>
+              </tr>
+            }
+
+            <tr>
+              <td colspan="3"></td>
+              <td class="fw-bold">
+                <p> Shipping: FREE </p>
+                <p> Total Price: {{totalPrice | currency: "USD" }}</p>
+                <a class="btn btn-danger btn-lg mt-3" routerLink="/checkout"> Checkout </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      } @else {
+        <div class="alert alert-warning"> your shopping cart is empty </div>
+      }
+    </div>
+  </div>
+</div>
